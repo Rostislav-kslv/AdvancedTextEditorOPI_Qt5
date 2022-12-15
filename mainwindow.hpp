@@ -8,6 +8,9 @@
 #include <QMessageBox>
 #include <QTextStream>
 
+#include "finddialog.hpp"
+#include "replacedialog.hpp"
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -44,7 +47,7 @@ class MainWindow : public QMainWindow {
 
   void on_actionSelect_all_triggered();
 
-  void on_actionZoom_ib_triggered();
+  void on_actionZoom_in_triggered();
 
   void on_actionZoom_out_triggered();
 
@@ -66,6 +69,10 @@ class MainWindow : public QMainWindow {
 
   void on_textEdit_textChanged();
 
+  void on_actionUndo_triggered();
+
+  void on_actionRedo_triggered();
+
  private:
   Ui::MainWindow *ui;
 
@@ -80,6 +87,6 @@ class MainWindow : public QMainWindow {
 
   // QWidget interface
  protected:
-  void closeEvent(QCloseEvent *event);
+  void closeEvent(QCloseEvent *event) override;
 };
 #endif  // MAINWINDOW_HPP
