@@ -84,21 +84,60 @@ void MainWindow::on_actionZoom_in_triggered() { ui->textEdit->zoomIn(1); }
 
 void MainWindow::on_actionZoom_out_triggered() { ui->textEdit->zoomOut(1); }
 
-void MainWindow::on_actionBold_triggered() {}
+void MainWindow::on_actionBold_triggered() {
+  QFont font = ui->textEdit->currentFont();
+  font.bold() ? font.setBold(false) : font.setBold(true);
+  ui->textEdit->setCurrentFont(font);
+  m_changed = true;
+}
 
-void MainWindow::on_actionItalic_triggered() {}
+void MainWindow::on_actionItalic_triggered() {
+  QFont font = ui->textEdit->currentFont();
+  font.italic() ? font.setItalic(false) : font.setItalic(true);
+  ui->textEdit->setCurrentFont(font);
+  m_changed = true;
+}
 
-void MainWindow::on_actionUnderline_triggered() {}
+void MainWindow::on_actionUnderline_triggered() {
+  QFont font = ui->textEdit->currentFont();
+  font.underline() ? font.setUnderline(false) : font.setUnderline(true);
+  ui->textEdit->setCurrentFont(font);
+  m_changed = true;
+}
 
-void MainWindow::on_actionStrike_triggered() {}
+void MainWindow::on_actionStrike_triggered() {
+  QFont font = ui->textEdit->currentFont();
+  font.strikeOut() ? font.setStrikeOut(false) : font.setStrikeOut(true);
+  ui->textEdit->setCurrentFont(font);
+  m_changed = true;
+}
 
-void MainWindow::on_actionColor_triggered() {}
+void MainWindow::on_actionColor_triggered() {
+  QColor current = ui->textEdit->currentCharFormat().foreground().color();
+  QColor color = QColorDialog::getColor(current, this, "Select a color");
 
-void MainWindow::on_actionFont_triggered() {}
+  ui->textEdit->setTextColor(color);
+  m_changed = true;
+}
 
-void MainWindow::on_actionHelp_triggered() {}
+void MainWindow::on_actionFont_triggered() {
+  bool ok;
+  QFont font = QFontDialog::getFont(&ok, ui->textEdit->currentFont(), this,
+                                    "Choose a font");
+  if (ok) {
+    ui->textEdit->setCurrentFont(font);
+  }
+  m_changed = true;
+}
 
-void MainWindow::on_actionAbout_triggered() {}
+void MainWindow::on_actionHelp_triggered() {
+  QDesktopServices::openUrl(QUrl(QApplication::organizationDomain()));
+}
+
+void MainWindow::on_actionAbout_triggered() {
+  AboutDialog *dlg = new AboutDialog(this);
+  if (!dlg->exec()) return;
+}
 
 void MainWindow::on_textEdit_textChanged() { m_changed = true; }
 

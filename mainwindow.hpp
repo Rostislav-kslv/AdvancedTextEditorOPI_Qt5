@@ -1,13 +1,19 @@
 #ifndef MAINWINDOW_HPP
 #define MAINWINDOW_HPP
 
+#include <QApplication>
 #include <QCloseEvent>
+#include <QColorDialog>
+#include <QDesktopServices>
 #include <QFile>
 #include <QFileDialog>
+#include <QFontDialog>
 #include <QMainWindow>
 #include <QMessageBox>
 #include <QTextStream>
+#include <QUrl>
 
+#include "aboutdialog.hpp"
 #include "finddialog.hpp"
 #include "replacedialog.hpp"
 
